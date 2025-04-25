@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Popup.css";
+import ReactMarkdown from "react-markdown";
+import rehypeSanitize from "rehype-sanitize";
 
 /* global chrome */
 
@@ -79,6 +81,29 @@ export default function Popup() {
     }
   };
 
+  // Add this function to convert basic markdown to HTML
+//   const formatExplanation = (text) => {
+//     if (!text) return "";
+
+//     return (
+//       text
+//         // Convert bold (**text**)
+//         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+//         // Convert bullet points
+//         .replace(/\*\s+(.*?)(?=\n|$)/g, "<li>$1</li>")
+//         // Wrap bullet point lists in <ul>
+//         .replace(/<li>(.*?)(?=<li>|$)/gs, (match) => {
+//           return `<ul>${match}</ul>`;
+//         })
+//         // Fix nested lists
+//         .replace(/<\/ul><ul>/g, "")
+//         // Add paragraph breaks
+//         .replace(/\n\n/g, "</p><p>")
+//         // Replace single line breaks
+//         .replace(/\n/g, "<br>")
+//     );
+//   };
+
   return (
     <div className="popup-container">
       <h1>AI Explainer</h1>
@@ -100,7 +125,12 @@ export default function Popup() {
         ) : error ? (
           <div className="error">{error}</div>
         ) : explanation ? (
-          <p>{explanation}</p>
+          <ReactMarkdown
+            className="markdown-content"
+            rehypePlugins={[rehypeSanitize]} // For security
+          >
+            {explanation}
+          </ReactMarkdown>
         ) : (
           <div className="instructions">
             Select text on any webpage, right-click and choose "Explain Selected
