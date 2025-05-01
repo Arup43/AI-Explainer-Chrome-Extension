@@ -18,3 +18,16 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         });
     }
 });
+
+// Add this to your background.js
+chrome.runtime.onInstalled.addListener((details) => {
+    if (details.reason === "install") {
+        // Set default settings on first install
+        chrome.storage.sync.set({
+            language: 'English',
+            maxLen: 500,
+            explanationMode: 'simple',
+            theme: 'light'
+        });
+    }
+});
