@@ -96,41 +96,43 @@ export default function Popup() {
     <div className={`popup-container ${theme}`}>
       <h1 className="popup-title">AI Explainer</h1>
 
-      {selectedText && (
-        <div className="selected-text">
-          <h2>Selected Text:</h2>
-          <p>{selectedText}</p>
-        </div>
-      )}
-
-      <div className="explanation-container">
-        <h2>Explanation:</h2>
-        {isLoading ? (
-          <div className="loading-spinner">
-            <div className="spinner"></div>
-            <p>Loading explanation...</p>
-          </div>
-        ) : error ? (
-          <div className="error">{error}</div>
-        ) : explanation ? (
-          <ReactMarkdown
-            className="markdown-content"
-            rehypePlugins={[rehypeSanitize]} // For security
-          >
-            {explanation}
-          </ReactMarkdown>
-        ) : (
-          <div className="instructions">
-            Select text on any webpage, right-click and choose "Explain Selected
-            Text" to get an explanation.
+      <div className="popup-content">
+        {selectedText && (
+          <div className="selected-text">
+            <h2>Selected Text:</h2>
+            <p>{selectedText}</p>
           </div>
         )}
-      </div>
 
-      <div className="settings-link">
-        <a href="options.html" target="_blank">
-          Settings
-        </a>
+        <div className="explanation-container">
+          <h2>Explanation:</h2>
+          {isLoading ? (
+            <div className="loading-spinner">
+              <div className="spinner"></div>
+              <p>Loading explanation...</p>
+            </div>
+          ) : error ? (
+            <div className="error">{error}</div>
+          ) : explanation ? (
+            <ReactMarkdown
+              className="markdown-content"
+              rehypePlugins={[rehypeSanitize]} // For security
+            >
+              {explanation}
+            </ReactMarkdown>
+          ) : (
+            <div className="instructions">
+              Select text on any webpage, right-click and choose "Explain
+              Selected Text" to get an explanation.
+            </div>
+          )}
+        </div>
+
+        <div className="settings-link">
+          <a href="options.html" target="_blank">
+            Settings
+          </a>
+        </div>
       </div>
     </div>
   );
