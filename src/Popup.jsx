@@ -81,29 +81,6 @@ export default function Popup() {
     }
   };
 
-  // Add this function to convert basic markdown to HTML
-//   const formatExplanation = (text) => {
-//     if (!text) return "";
-
-//     return (
-//       text
-//         // Convert bold (**text**)
-//         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-//         // Convert bullet points
-//         .replace(/\*\s+(.*?)(?=\n|$)/g, "<li>$1</li>")
-//         // Wrap bullet point lists in <ul>
-//         .replace(/<li>(.*?)(?=<li>|$)/gs, (match) => {
-//           return `<ul>${match}</ul>`;
-//         })
-//         // Fix nested lists
-//         .replace(/<\/ul><ul>/g, "")
-//         // Add paragraph breaks
-//         .replace(/\n\n/g, "</p><p>")
-//         // Replace single line breaks
-//         .replace(/\n/g, "<br>")
-//     );
-//   };
-
   return (
     <div className="popup-container">
       <h1>AI Explainer</h1>
