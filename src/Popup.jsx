@@ -83,7 +83,7 @@ export default function Popup() {
 
   return (
     <div className="popup-container">
-      <h1>AI Explainer</h1>
+      <h1 className="popup-title">AI Explainer</h1>
 
       {selectedText && (
         <div className="selected-text">
