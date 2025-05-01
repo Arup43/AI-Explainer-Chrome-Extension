@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./Popup.css";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
+import { ThemeContext } from "./context/ThemeContext";
+import { getSettings } from "./services/settingsService";
 
 /* global chrome */
 
@@ -11,7 +13,8 @@ export default function Popup() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   // Use a fixed backend URL instead of allowing user input
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Replace with your actual fixed backend URL
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // Retrieve the selected text and explanation from storage
@@ -42,12 +45,20 @@ export default function Popup() {
     setExplanation(""); // Clear any existing explanation while loading
 
     try {
+      // Get user settings first
+      const settings = await getSettings();
+
       const response = await fetch(`${BACKEND_URL}/api/explain`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({
+          text,
+          language: settings.language,
+          maxLen: settings.maxLen,
+          explanationMode: settings.explanationMode,
+        }),
       });
 
       const responseText = await response.text();
@@ -82,7 +93,7 @@ export default function Popup() {
   };
 
   return (
-    <div className="popup-container">
+    <div className={`popup-container ${theme}`}>
       <h1 className="popup-title">AI Explainer</h1>
 
       {selectedText && (
@@ -114,6 +125,12 @@ export default function Popup() {
             Text" to get an explanation.
           </div>
         )}
+      </div>
+
+      <div className="settings-link">
+        <a href="options.html" target="_blank">
+          Settings
+        </a>
       </div>
     </div>
   );

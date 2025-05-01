@@ -11,6 +11,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: resolve(fileURLToPath(new URL('.', import.meta.url)), 'popup.html'),
+        options: resolve(fileURLToPath(new URL('.', import.meta.url)), 'options.html'),
         background: resolve(fileURLToPath(new URL('.', import.meta.url)), 'src/background.js'),
         // contentScript: resolve(fileURLToPath(new URL('.', import.meta.url)), 'src/contentScript.js')
       },
