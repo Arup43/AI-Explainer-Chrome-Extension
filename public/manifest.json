@@ -17,12 +17,6 @@
     "128": "icon128.png"
   },
   "permissions": ["activeTab", "contextMenus", "storage"],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["src/contentScript.js"]
-    }
-  ],
   "background": {
     "service_worker": "src/background.js",
     "type": "module"

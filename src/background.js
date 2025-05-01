@@ -16,19 +16,5 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             // Open the popup
             chrome.action.openPopup();
         });
-
-        // Send a message to the content script
-        chrome.tabs.sendMessage(tab.id, {
-            action: "getExplanation",
-            text: selectedText
-        });
     }
 });
-
-// Listen for messages from content script
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "setExplanation") {
-        // Store the explanation in Chrome storage
-        chrome.storage.local.set({ explanation: request.explanation });
-    }
-}); 

@@ -12,7 +12,7 @@ export default defineConfig({
       input: {
         popup: resolve(fileURLToPath(new URL('.', import.meta.url)), 'popup.html'),
         background: resolve(fileURLToPath(new URL('.', import.meta.url)), 'src/background.js'),
-        contentScript: resolve(fileURLToPath(new URL('.', import.meta.url)), 'src/contentScript.js')
+        // contentScript: resolve(fileURLToPath(new URL('.', import.meta.url)), 'src/contentScript.js')
       },
       output: {
         entryFileNames: 'src/[name].js',
