@@ -34,4 +34,4 @@ export const saveAllSettings = async (settings) => {
             resolve();
         });
     });
-}; 
+};

@@ -18,7 +18,7 @@ export default function Popup() {
 
   useEffect(() => {
     // Retrieve the selected text and explanation from storage
-    chrome.storage.local.get(["selectedText", "explanation"], (result) => {
+    chrome.storage.local.get(["selectedText"], (result) => {
       if (result.selectedText) {
         setSelectedText(result.selectedText);
 
@@ -34,9 +34,6 @@ export default function Popup() {
         );
       }
     });
-
-    // Clear the explanation in storage when the popup is opened
-    chrome.storage.local.remove("explanation");
   }, []);
 
   const fetchExplanation = async (text) => {
