@@ -1,84 +1,160 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
 # AI Explainer Chrome Extension
 
-This Chrome extension allows you to select text on any webpage and get an AI-powered explanation for the selected text.
+A powerful Chrome extension that provides AI-powered explanations for any selected text on web pages. Built with React and Vite, this extension offers customizable explanations in multiple languages and explanation modes.
 
-## Features
+## 🚀 Features
 
-- Select text on any webpage and get an explanation
-- Right-click context menu integration
-- Customizable backend API URL
-- Clean and intuitive user interface
+- **Smart Text Selection**: Right-click on any selected text to get instant AI explanations
+- **Multiple Languages**: Support for English and Bengali explanations
+- **Customizable Explanation Modes**:
+  - **Simple**: Easy-to-understand explanations
+  - **Detailed**: Comprehensive explanations with more context
+  - **Technical**: Advanced explanations for technical content
+- **Adjustable Length**: Control explanation length (100-2000 characters)
+- **Theme Support**: Light and dark themes for better user experience
+- **Markdown Rendering**: Rich text formatting for explanations
+- **Context Menu Integration**: Seamless integration with browser context menus
 
-## Installation
+## 🛠️ Technology Stack
 
-1. Clone this repository
-2. Install dependencies:
-   ```
-   npm install
-   ```
-3. Build the extension:
-   ```
-   npm run build
-   ```
-4. Load the extension in Chrome:
+- **Frontend**: React 19, Vite
+- **Styling**: CSS with theme support
+- **Markdown**: React Markdown with sanitization
+- **Chrome APIs**:
+  - **Manifest V3**: Modern extension manifest format
+  - **Context Menus API**: For right-click context menu integration
+  - **Storage API**: For saving user settings and selected text
+  - **Active Tab API**: For accessing current tab content
+  - **Service Worker**: Background script for extension functionality
+- **Build Tool**: Vite for development and production builds
+
+## 📦 Installation
+
+### For Users
+
+1. **Download the Extension**:
+
+   - Clone this repository or download the source code
+   - Run `npm install` to install dependencies
+   - Run `npm run build` to build the extension
+   - The built extension will be in the `dist/` folder
+
+2. **Install in Chrome**:
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode" in the top right
-   - Click "Load unpacked" and select the `dist` directory
+   - Click "Load unpacked" and select the `dist/` folder
+   - The AI Explainer extension will appear in your extensions list
 
-## Usage
+### For Developers
 
-1. Select text on any webpage
-2. Right-click and select "Explain Selected Text" from the context menu
-3. The extension popup will appear with the explanation
+1. **Clone the Repository**:
 
-## Configuration
+   ```bash
+   git clone <repository-url>
+   cd AI-Explainer-Chrome-Extension
+   ```
 
-You can configure the backend API URL in the extension popup. By default, it points to `https://your-backend-service.com`, but you can change it to your own backend service.
+2. **Install Dependencies**:
 
-## Development
+   ```bash
+   npm install
+   ```
 
-To start development server:
+3. **Development Mode**:
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for Production**:
+   ```bash
+   npm run build
+   ```
+
+## 🎯 How to Use
+
+1. **Select Text**: Highlight any text on any webpage
+2. **Right-Click**: Right-click on the selected text
+3. **Choose "Explain Selected Text"**: Click this option from the context menu
+4. **View Explanation**: The extension popup will open with the AI-generated explanation
+5. **Customize Settings**: Click the "Settings" link in the popup to customize your experience
+
+## ⚙️ Configuration
+
+Access the settings page to customize your experience:
+
+- **Language**: Choose between English and Bengali
+- **Explanation Length**: Set maximum explanation length (100-2000 characters)
+- **Explanation Mode**: Select Simple, Detailed, or Technical explanations
+- **Theme**: Choose between Light and Dark themes
+
+## 🔧 Development
+
+### Project Structure
 
 ```
-npm run dev
+AI-Explainer-Chrome-Extension/
+├── public/                 # Static assets and manifest
+│   ├── manifest.json      # Chrome extension manifest
+│   └── icons/            # Extension icons
+├── src/                   # Source code
+│   ├── Popup.jsx         # Main popup component
+│   ├── Options.jsx       # Settings page component
+│   ├── background.js     # Background service worker
+│   ├── services/         # Service layer
+│   └── context/          # React context providers
+├── package.json          # Dependencies and scripts
+└── vite.config.js        # Vite configuration
 ```
 
-To build the extension:
+### Available Scripts
 
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_BACKEND_URL=your_backend_api_url
 ```
-npm run build
-```
 
-## Backend API
+## 🔒 Permissions
 
-The extension expects a backend API endpoint at `{base_url}/api/explain` that accepts POST requests with the following body:
+This extension requires the following permissions:
 
-```json
-{
-  "text": "selected text"
-}
-```
+- **activeTab**: To access the current tab's content
+- **contextMenus**: To create right-click context menu items
+- **storage**: To save user settings and selected text
 
-The API should return a response in this format:
+## 🐛 Troubleshooting
 
-```json
-{
-  "success": true,
-  "content": {
-    "explanation": "explanation of the selected text"
-  }
-}
-```
+### Common Issues
+
+1. **Extension not loading**: Make sure you're using Chrome and have Developer mode enabled
+2. **Context menu not appearing**: Check that the extension is properly installed and enabled
+3. **Explanations not loading**: Verify your backend API is running and accessible
+
+### Support
+
+If you encounter any issues, please:
+
+1. Check the browser console for error messages
+2. Verify your backend API configuration
+3. Ensure all permissions are granted
+
+## 🔄 Updates
+
+To update the extension:
+
+1. Pull the latest changes from the repository
+2. Run `npm install` to update dependencies
+3. Run `npm run build` to rebuild the extension
+4. Reload the extension in Chrome's extension manager
+
+---
+
+**Note**: This extension requires a backend API service to provide AI explanations. Make sure to configure the `VITE_BACKEND_URL` environment variable with your API endpoint.
